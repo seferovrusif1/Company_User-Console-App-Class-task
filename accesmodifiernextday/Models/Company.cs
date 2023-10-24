@@ -20,6 +20,7 @@ namespace accesmodifiernextday.Models
         {
             Array.Resize(ref _employees, _employees.Length + 1);
             _employees[_employees.Length - 1] = user;
+            Console.WriteLine("\nUser Aded\n");
         }
         public void GetAllUsers()
         {
@@ -32,19 +33,32 @@ namespace accesmodifiernextday.Models
         {
             foreach (var item in _employees)
             {
-                if (item.UserName == username) ;
+                if (item.UserName == username) 
                 {
-                    Console.WriteLine(item.GetFullInfo);
+                    Console.WriteLine($"\n\nEmploye name: {item.Name}\nSurname: {item.SurName}\nAge: {item.Agee}\nUsername: {item.UserName}\n\n");
                 }
             }
         }
         public void RemoveUser(string username)
         {
-            for (int i = 0; i < _employees.Length; i++)
+            foreach (var item in _employees)
             {
-                if (_employees[i].UserName == username)
+                if (item.UserName == username)
                 {
-                    _employees[i] = null;          
+                    Employee[] _employeesTemp = new Employee[_employees.Length - 1];
+                    for (int i = 0; i < _employees.Length; i++)
+                    {
+                        if (_employees[i].UserName != username)
+                        {
+                            _employeesTemp[i] = _employees[i];
+                        }
+                    }
+                    _employees = _employeesTemp;
+                    Console.WriteLine("\nUser Removed\n");
+                }
+                else
+                {
+                    Console.WriteLine("User is not found");
                 }
             }
         }
@@ -74,14 +88,21 @@ namespace accesmodifiernextday.Models
         public void UpdateName(int i)
         {
             _employees[i].Name = Console.ReadLine();
+            _employees[i].UserName= _employees[i].Name + "_" + _employees[i].SurName;
+            Console.WriteLine("\nName and UserName updated\n");
         }
         public void UpdateSurName(int i)
         {
             _employees[i].SurName = Console.ReadLine();
+            _employees[i].UserName = _employees[i].Name + "_" + _employees[i].SurName;
+            Console.WriteLine("\nSurName and UserName updated\n");
+
         }
         public void UpdateAge(int i)
         {
             _employees[i].Agee = Convert.ToByte(Console.ReadLine());
+            Console.WriteLine("\nAge updated\n");
+
         }
 
     }

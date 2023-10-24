@@ -44,9 +44,5 @@ namespace accesmodifiernextday.Models
         }
         
        
-        public void GetFullInfo()
-        {//to string aarrray methodu
-            Console.WriteLine($"Employe name: {_name}\nSurname: {_surname}\nAge: {_age}\nUsername: {UserName}");
-        }
     }
 }
